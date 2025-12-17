@@ -1,0 +1,188 @@
+:root {
+  --bg: #F5F3F1;
+  --text: #1a1a1a;
+  --muted: #6f6f6f;
+  --accent: #8c6d3f;
+
+  /* NEW: tile concept sizing */
+  --tileSize: 120px; /* try 96px / 120px / 140px */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+}
+
+/* ---- Case study layout ---- */
+.case-study {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 72px 24px 120px;
+}
+
+.hero {
+  margin-bottom: 80px;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6vw, 56px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 60ch;
+}
+
+.section {
+  margin-bottom: 72px;
+}
+
+.section h2 {
+  font-size: 22px;
+  margin-bottom: 16px;
+}
+
+.section p {
+  font-size: 16px;
+  line-height: 1.65;
+  color: #2a2a2a;
+  max-width: 70ch;
+}
+
+/* ---- Vision board wrapper ---- */
+.vision-board {
+  margin-top: 24px;
+}
+
+/* These are your old placeholder cards (keep for other sections if needed) */
+.vision-placeholder,
+.tile-card,
+.viz-placeholder {
+  background: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* ---- Tiles row (your static 4 tiles section) ---- */
+.tiles-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+/* ---- Lessons ---- */
+.lessons ol {
+  padding-left: 20px;
+  color: #333;
+}
+
+.lessons li {
+  margin-bottom: 8px;
+}
+
+/* =========================================================
+   NEW: Tile concept row (green tile -> arrow -> changing tile)
+   ========================================================= */
+
+.tile-concept-row {
+  display: grid;
+  grid-template-columns: var(--tileSize) 120px var(--tileSize) minmax(240px, 1fr);
+  gap: 14px;
+  align-items: center;
+
+  /* prevents stacking on narrow screens */
+  overflow-x: auto;
+  padding-bottom: 6px; /* room for scrollbar if it appears */
+}
+
+.tile-stack {
+  width: var(--tileSize);
+  height: var(--tileSize);
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.tile-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain; /* best for svg */
+}
+
+/* Arrow */
+.arrow-wrap {
+  display: grid;
+  place-items: center;
+  min-width: 120px;
+}
+
+.arrow-svg {
+  width: 110px;
+  height: 44px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+/* Controls */
+.tile-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 260px;
+}
+
+.control-label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: #2a2a2a;
+}
+
+input[type="range"] {
+  width: 100%;
+}
+
+.prompt-readout {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.prompt-num {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.prompt-unit {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+/* ---- Responsive tweaks ---- */
+@media (max-width: 700px) {
+  /* keep your 4-tile grid responsive */
+  .tiles-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* IMPORTANT: we are intentionally NOT stacking the tile-concept-row.
+     It will remain side-by-side and scroll horizontally. */
+}
